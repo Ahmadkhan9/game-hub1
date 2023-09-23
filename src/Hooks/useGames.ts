@@ -4,17 +4,17 @@ import { CanceledError } from "axios";
 export interface Games {
   id: number;
   name: string;
+  background_image :string
 }
 interface GameResponseProps {
   count: number;
   results: Games[];
 }
-
 const useGames = () => {
-    const controller = new AbortController();
     const [games, setGames] = useState<Games[]>([]);
     const [error, setError] = useState("");
     useEffect(() => {
+        const controller = new AbortController();
         apiClient
         .get<GameResponseProps>("/games" , {signal: controller.signal})
         .then(res => setGames(res.data.results))
