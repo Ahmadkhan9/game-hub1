@@ -3,13 +3,14 @@ import React from "react";
 import { Games } from "../Hooks/useGames";
 import PlatformIconList from "./platformIconList";
 import CriticScore from "./CriticScore";
+import getCropedImage from "../services/getCropedImage";
 interface GamesProp {
   game: Games;
 }
 function GameCard({ game }: GamesProp) {
   return (
     <Card borderRadius={10} overflow="hidden">
-      <Image src={game.background_image} />
+      <Image src={getCropedImage(game.background_image)} />
       <CardBody>
         <Heading fontSize="2xl">{game.name}</Heading>
         <HStack justifyContent="space-between">
