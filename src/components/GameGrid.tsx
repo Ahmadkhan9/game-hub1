@@ -9,26 +9,23 @@ function GameGrid() {
   const { data, error, loading } = useGames();
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
-    <>
-      {error && <Text>{error}</Text>}
-      <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
-        spacing={10}
-        padding={5}
-      >
-        {loading &&
-          skeleton.map((skel) => (
-            <GameCardContainer>
-              <GameCardSkeleton />
-            </GameCardContainer>
-          ))}
-        {data.map((res) => (
-          <GameCardContainer>
-            <GameCard key={res.id} game={res} />
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+      spacing={10}
+      padding={5}
+    >
+      {loading &&
+        skeleton.map((skeletons) => (
+          <GameCardContainer key={skeletons}>
+            <GameCardSkeleton />
           </GameCardContainer>
         ))}
-      </SimpleGrid>
-    </>
+      {data.map((res) => (
+        <GameCardContainer key={res.id}>
+          <GameCard game={res} />
+        </GameCardContainer>
+      ))}
+    </SimpleGrid>
   );
 }
 

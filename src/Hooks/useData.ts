@@ -3,7 +3,7 @@ import apiClient from "../services/api-client";
 import { CanceledError } from "axios";
 interface dataResponse<T>{
     count : number;
-    results : T[]
+    results : T[];
 }
 const useData = <T>(endpoint : string)=> {
     const [data, setData] = useState<T[]>([]);
