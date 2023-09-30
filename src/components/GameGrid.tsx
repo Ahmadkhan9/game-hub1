@@ -5,18 +5,50 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
 import { Genre } from "../Hooks/useGenre";
+import { gameQuery } from "../App";
 interface Props {
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: gameQuery;
 }
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
-  const { data, loading } = useGames(selectedGenre, selectedPlatform);
+const GameGrid = ({ gameQuery }: Props) => {
+  const { data, loading } = useGames(gameQuery);
   const skeleton = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  if (gameQuery.event) {
+    return (
+      <SimpleGrid
+        columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+        spacing={10}
+        padding="10px"
+      >
+        {loading &&
+          skeleton.map((skeletons) => (
+            <GameCardContainer key={skeletons}>
+              <GameCardSkeleton />
+            </GameCardContainer>
+          ))}
+        {data.map(
+          (res) =>
+            res.name.includes(gameQuery.event) && (
+              <GameCardContainer key={res.id}>
+                <GameCard game={res} />
+              </GameCardContainer>
+            )
+        )}
+        {data.map(
+          (item) =>
+            item.metacritic.toString().includes(gameQuery.event) && (
+              <GameCardContainer key={item.id}>
+                <GameCard game={item} />
+              </GameCardContainer>
+            )
+        )}
+      </SimpleGrid>
+    );
+  }
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
       spacing={10}
-      padding={5}
+      padding="10px"
     >
       {loading &&
         skeleton.map((skeletons) => (

@@ -11,7 +11,7 @@ import useGames from "../Hooks/useGames";
 import useGenre, { Genre } from "../Hooks/useGenre";
 import getCropedImage from "../services/getCropedImage";
 interface Props {
-  onSelectGenre: (genre: Genre) => void;
+  onSelectGenre: (genres: Genre) => void;
   selectedGenre: Genre | null;
 }
 function GenreList({ selectedGenre, onSelectGenre }: Props) {
