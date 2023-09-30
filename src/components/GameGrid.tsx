@@ -25,22 +25,11 @@ const GameGrid = ({ gameQuery }: Props) => {
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {data.map(
-          (res) =>
-            res.name.includes(gameQuery.event) && (
-              <GameCardContainer key={res.id}>
-                <GameCard game={res} />
-              </GameCardContainer>
-            )
-        )}
-        {data.map(
-          (item) =>
-            item.metacritic.toString().includes(gameQuery.event) && (
-              <GameCardContainer key={item.id}>
-                <GameCard game={item} />
-              </GameCardContainer>
-            )
-        )}
+        {data.map((res) => (
+          <GameCardContainer key={res.id}>
+            <GameCard game={res} />
+          </GameCardContainer>
+        ))}
       </SimpleGrid>
     );
   }
